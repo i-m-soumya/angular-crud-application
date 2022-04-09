@@ -1,30 +1,34 @@
 <h1 mat-dialog-title>Add Product</h1>
-<div mat-dialog-content>
-  <mat-form-field class="w-100 p-2" appearance="outline">
-    <mat-label>Product Name</mat-label>
-    <input matInput>
-  </mat-form-field>
-  <mat-form-field class="w-100 p-2" appearance="outline">
-    <mat-label>Product Category</mat-label>
-    <mat-select name="Category">
-      <mat-option *ngFor="let category of categories" [value]="category">
-        {{category}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <div class="p-2">
-    <p><label id="example-radio-group-label">Is the product available?</label></p>
-    <mat-radio-group aria-label="Select an option">
-      <mat-radio-button value="Yes">Yes</mat-radio-button>
-      <mat-radio-button value="No">No</mat-radio-button>
-    </mat-radio-group>
+<form #addProductForm="ngForm" (ngSubmit)="onSubmitProductCreate(addProductForm)">
+  <div>
+    <div mat-dialog-content>
+      <mat-form-field class="w-100 p-2" appearance="outline">
+        <mat-label>Product Name</mat-label>
+        <input matInput required [(ngModel)]="productName" name="productName">
+      </mat-form-field>
+      <mat-form-field class="w-100 p-2" appearance="outline">
+        <mat-label>Product Category</mat-label>
+        <mat-select name="Category" required [(ngModel)]="productCategory" name="productCategory">
+          <mat-option *ngFor="let category of categories" [value]="category">
+            {{category}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="p-2">
+        <p><label id="example-radio-group-label">Is the product available?</label></p>
+        <mat-radio-group aria-label="Select an option" required [(ngModel)]="productIsAvailable" name="productIsAvailable">
+          <mat-radio-button value="Yes">Yes</mat-radio-button>
+          <mat-radio-button value="No">No</mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <mat-form-field class="w-100 p-2 mt-2" appearance="outline">
+        <mat-label>Product Description</mat-label>
+        <textarea matInput placeholder="Ex. It is the best product..." required [(ngModel)]="productDescription" name="productDescription"></textarea>
+      </mat-form-field>
+    </div>
+    <div mat-dialog-actions align="end">
+      <button mat-raised-button color="warn" mat-dialog-close>Cancel</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!addProductForm.valid">Save</button>
+    </div>
   </div>
-  <mat-form-field class="w-100 p-2 mt-2" appearance="outline">
-    <mat-label>Product Description</mat-label>
-    <textarea matInput placeholder="Ex. It is the best product..."></textarea>
-  </mat-form-field>
-</div>
-<div mat-dialog-actions align="end">
-  <button mat-raised-button color="warn" mat-dialog-close>Cancel</button>
-  <button mat-raised-button color="primary">Save</button>
-</div>
+</form>

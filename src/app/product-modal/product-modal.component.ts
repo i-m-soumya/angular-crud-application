@@ -1,3 +1,4 @@
+import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductModalComponent implements OnInit {
 
+  productName: string = ""
+  productCategory: string = ""
+  productIsAvailable: string = ""
+  productDescription : string = ""
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onSubmitProductCreate(addProductFormData : NgForm) {
+    console.log(addProductFormData)
   }
   categories: String[] = [ 'Electronics', 'Foods', 'Household', 'Drinks'];
 
